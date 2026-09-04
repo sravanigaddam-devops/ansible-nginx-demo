@@ -1,0 +1,6 @@
+[web]
+sammy_server ansible_host=YOUR_EC2_PUBLIC_IP ansible_user=ubuntu ansible_ssh_private_key_file=/home/sravani08/.ssh/controller-key.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[web:vars]
+ansible_become=yes
+ansible_become_method=sudo

@@ -1,0 +1,57 @@
+---
+- hosts: web
+  become: yes
+  vars:
+    app_root: /var/www/sammy
+    nginx_port: 80
+
+  tasks:
+    - name: Update apt cache and install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Create document root
+      file:
+        path: "{{ app_root }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Copy website files to the server's document root
+      copy:
+        src: files/index.html
+        dest: "{{ app_root }}/index.html"
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Apply Nginx template
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/sites-available/sammy
+        mode: '0644'
+      notify: Restart Nginx
+
+    - name: Enable Nginx site
+      file:
+        src: /etc/nginx/sites-available/sammy
+        dest: /etc/nginx/sites-enabled/sammy
+        state: link
+      notify: Restart Nginx
+
+    - name: Allow all access to tcp port 80
+      ufw:
+        rule: allow
+        port: '80'
+        proto: tcp
+      ignore_errors: yes
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes

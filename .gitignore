@@ -1,0 +1,6 @@
+*.pem
+*.key
+*.retry
+.ansible/
+inventory.yml
+inventory
