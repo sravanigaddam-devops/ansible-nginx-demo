@@ -56,11 +56,14 @@ Defined in playbook vars::
 vars:
   app_root: /var/www/sammy
   nginx_port: 80
+
 Task 6: Execution
 ansible-playbook -i inventory.yml playbook.yml
 # PLAY RECAP => ok=7 changed=5 failed=0 unreachable=0
 curl http://3.90.110.93
 # Browser: http://3.90.110.93 -> Sammy the Shark
+
+
 How to Run Manually
 git clone https://github.com/sravanigaddam-devops/ansible-nginx-demo.git
 cd ansible-nginx-demo
