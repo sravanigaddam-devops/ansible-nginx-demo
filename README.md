@@ -63,7 +63,6 @@ ansible-playbook -i inventory.yml playbook.yml
 curl http://3.90.110.93
 # Browser: http://3.90.110.93 -> Sammy the Shark
 
-
 How to Run Manually
 git clone https://github.com/sravanigaddam-devops/ansible-nginx-demo.git
 cd ansible-nginx-demo
@@ -83,4 +82,3 @@ Ansible
 Nginx
 AWS EC2 Ubuntu 22.04
 YAML, Jinja2, UFW
-
